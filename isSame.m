@@ -1,8 +1,12 @@
 function y = isSame(v1, v2)
 y = 1;
-for i = 1:length(v1)
-    if v1(i) ~= v2(i)
-        y = 0;
-    end
+counter = 0;
+tempv1 = round(v1,1);
+tempv2 = round(v2,1);
+
+result = tempv1 == tempv2
+
+if all(result,1)
+   y = 0; 
 end
 end

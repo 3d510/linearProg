@@ -1,6 +1,6 @@
 p1Price = 4;
 p3MaxDemand = 2;
-delta = 0.2;
+delta = 0.01;
 [initX,fval,exitflag,output,lambda] = Q1_b(p3MaxDemand, p1Price);
 
 % find beta
