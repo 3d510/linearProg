@@ -10,8 +10,8 @@ upperbound = -upperbound;
 
 % store optimal solution for nodes, node_number and node_parent
 % used to contruct the tree 
-% each row of node_result: (x1_best, x2_best, z, node_number,parent_number)
-node_result = [x(1) x(2) upperbound 1 -1]; 
+% each row of node_result: (x1_best, x2_best, z, node_number,parent_number, current_lb, current_ub)
+node_result = [x(1) x(2) upperbound 1 -1 lowerbound upperbound]; 
 
 % add initial node to the queue
 [node1, node2] = Q2_generateNode(x(1), x(2), [1000 0 1000 0]);
@@ -35,14 +35,15 @@ while true
     [x,fval,exitflag,output,lambda] = Q2_linearProg(node);
     fval = -fval;
     if isempty(x)
-        node_result = [node_result; [-1 -1 -1 node(5) node(6)]];
+        node_result = [node_result; [-1 -1 -1 node(5) node(6) lowerbound upperbound]];
         continue; % terminate this branch because of infeasible solution
-    else
-        node_result = [node_result; [x(1) x(2) fval node(5) node(6)]];
     end
     [node1, node2] = Q2_generateNode(x(1), x(2), node);
     if isempty(node1) && isempty(node2) % integer solution for x
-        lowerbound = fval;
+        if lowerbound < fval
+            lowerbound = fval;
+        end
+        node_result = [node_result; [x(1) x(2) fval node(5) node(6) lowerbound upperbound]];
         if (lowerbound >= upperbound)
             break;
         end
