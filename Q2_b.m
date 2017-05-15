@@ -42,6 +42,3 @@ end
 
 fprintf('Q2b: x1 = %d, x2 = %d give best result z = %d\n', x_best, y_best, z);
 
-
-          
-          
