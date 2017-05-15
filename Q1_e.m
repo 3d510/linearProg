@@ -11,8 +11,8 @@ while (true)
         break;
     end
     [x,fval,exitflag,output,lambda] = Q1_b(p3MaxDemand, beta);
-    stopped = isSame(x, initX);
-    if stopped == 1
+    stopped = Q1_isFinished(x, initX);
+    if stopped
        break;
     end
 end
@@ -26,12 +26,12 @@ while (true)
         break;
     end
     [x,fval,exitflag,output,lambda] = Q1_b(p3MaxDemand, alpha);
-    stopped = isSame(x, initX);
-    if stopped == 1
+    stopped = Q1_isFinished(x, initX);
+    if stopped 
        break;
     end
 end
 alpha = alpha + delta;
 
 % print result
-fprintf('%f %f\n', alpha, beta);
+fprintf('alpha = %f, beta = %f\n', alpha, beta);
