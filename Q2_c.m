@@ -50,6 +50,7 @@ while true
         continue; % terminate this branch because of integer solution
     else
         upperbound = fval;
+        node_result = [node_result; [x(1) x(2) fval node(5) node(6) lowerbound upperbound]];
         % add more nodes to the queue
         queue = [queue; [node1, node_counter, node(5)]];
         queue = [queue; [node2, node_counter + 1, node(5)]];
@@ -57,6 +58,6 @@ while true
     end 
 end
 
-fprintf('Q2c: x1 = %d, x2 = %d give optimal result z = %d\n', x(1), x(2), fval);
+fprintf('Q2c: Using branch and bound method, we have x1 = %d, x2 = %d give optimal result z = %d\n', x(1), x(2), fval);
 
 
